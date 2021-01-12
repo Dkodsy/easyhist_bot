@@ -10,6 +10,7 @@ async def on_startup(dispatcher):
     # Уведомляет про запуск
     await on_startup_notify(dispatcher)
     await db.create_table_users()
+    await db.create_table_posts()
     #schedule_jobs()
 
 if __name__ == '__main__':

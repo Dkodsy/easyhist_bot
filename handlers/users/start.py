@@ -2,13 +2,14 @@ import asyncpg
 from aiogram import types, Dispatcher
 from aiogram.dispatcher.filters.builtin import CommandStart
 from datetime import datetime, timedelta
+
 from loader import dp, scheduler, db
 
 
 @dp.message_handler(CommandStart())
 async def start(message: types.Message):
-    user_id = message.from_user.id
     await message.answer(f"Привет, {message.from_user.full_name}!")
+    user_id = message.from_user.id
 
     try:
         await db.add_user(id=user_id,
@@ -24,3 +25,4 @@ async def start(message: types.Message):
                                   text="Текст, ссылка, какая нибудь хуйня")
 
     scheduler.add_job(send_with_timer, 'date', run_date=start_time + timedelta(seconds=60), args=(dp,))
+

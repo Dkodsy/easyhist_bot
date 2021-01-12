@@ -27,6 +27,16 @@ class Database:
         """
         await self.pool.execute(sql)
 
+    async def create_table_posts(self):
+        sql = """
+        CREATE TABLE IF NOT EXISTS Posts (
+            id SERIAL,
+            Post text,
+            PRIMARY KEY (id)
+            );
+        """
+        await self.pool.execute(sql)
+
     async def add_user(self, id: int, name: str, start_time):
         sql = """
         INSERT INTO Users(id, Name, start_time) VALUES($1, $2, $3)
@@ -38,3 +48,9 @@ class Database:
         SELECT start_time FROM users WHERE id=$1
         '''
         return await self.pool.fetchval(sql, id)
+
+    async def add_text(self, post: str):
+        sql = """
+        INSERT INTO Posts(Post) VALUES ($1)
+        """
+        await self.pool.execute(sql, post)
