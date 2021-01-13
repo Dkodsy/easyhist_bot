@@ -48,6 +48,11 @@ class Database:
         """
         return await self.pool.fetch(sql)
 
+    async def select_all_id(self):
+        sql = """
+        SELECT id FROM Users
+        """
+        return await self.pool.fetch(sql)
 
 '''
     Оставлю, на случай, если вернусь к идее с отложенными сообщениями
