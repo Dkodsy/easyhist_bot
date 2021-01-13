@@ -34,10 +34,19 @@ class Database:
         await self.pool.execute(sql, id, name, start_time)
 
     async def select_start_time(self, id):
-        sql = '''
+        sql = """
         SELECT start_time FROM users WHERE id=$1
-        '''
+        """
         return await self.pool.fetchval(sql, id)
+
+    async def count_users(self):
+        return await self.pool.fetchval('SELECT COUNT(*) FROM Users')
+
+    async def select_all_users(self):
+        sql = """
+        SELECT * FROM Users
+        """
+        return await self.pool.fetch(sql)
 
 
 '''

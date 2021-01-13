@@ -3,6 +3,7 @@ from aiogram.dispatcher.filters.builtin import Command
 from keyboards.default.admin_keyboard import keyboard
 from states.admin_states import Admins
 from filters.is_admin import IsAdmin
+from aiogram.utils.markdown import hcode
 from loader import dp, db
 
 
@@ -19,7 +20,11 @@ async def enter_text(message: types.Message):
 
 @dp.message_handler(IsAdmin(), text='Сколько сейчас пользователей?')
 async def enter_text(message: types.Message):
-    await message.answer(text='Отвечает сколько пользователей в базе')
+    count_users = await db.count_users()
+    await message.answer(text=f'Сейчас пользователей в базе - {count_users}')
+    all_users = await db.select_all_users()
+    format_all_users = [hcode(user) for user in all_users]
+    await message.answer(f'Список пользователей\n{format_all_users}')
 
 
 @dp.message_handler(state=Admins.enter_text)
