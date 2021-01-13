@@ -20,9 +20,19 @@ async def start(message: types.Message):
 
     start_time = await db.select_start_time(id=user_id)
 
-    async def send_with_timer(dp: Dispatcher):
+    async def send_with_timer_1(dp: Dispatcher):
         await dp.bot.send_message(user_id,
                                   text="Текст, ссылка, какая нибудь хуйня")
 
-    scheduler.add_job(send_with_timer, 'date', run_date=start_time + timedelta(seconds=60), args=(dp,))
+    async def send_with_timer_2(dp: Dispatcher):
+        await dp.bot.send_message(user_id,
+                                  text="Текст, ссылка, какая нибудь хуйня (2)")
+
+    async def send_with_timer_3(dp: Dispatcher):
+        await dp.bot.send_message(user_id,
+                                  text="Текст, ссылка, какая нибудь хуйня (3)")
+
+    scheduler.add_job(send_with_timer_1, 'date', run_date=start_time + timedelta(seconds=10), args=(dp,))
+    scheduler.add_job(send_with_timer_2, 'date', run_date=start_time + timedelta(seconds=60), args=(dp,))
+    scheduler.add_job(send_with_timer_3, 'date', run_date=start_time + timedelta(seconds=65), args=(dp,))
 
