@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from aiogram import types, Dispatcher
 from loader import dp, scheduler
 from utils.mailing import broadcaster
 
@@ -39,7 +38,8 @@ async def eight():
                       '«Ассоциации нашей и всемирной истории»\n\n'
                       'Особо внимательные помнят, что бонус доступен только 24 часа с момента публикации урока '
                       '— ищи кодовое слово и вводи в наш диалог\n\n'
-                      'Увидимся в 15:00 МСК❤')
+                      'Увидимся в 15:00 МСК❤',
+                      photo='AgACAgIAAxkBAAIFPl__V6TxXYGQbHV_8HyUar93zNCSAALXsDEb0qf5S8Zf9CLWae_lIAzkly4AAwEAAwIAA3kAA4ueBQABHgQ')
 
 
 async def nine():
@@ -82,7 +82,7 @@ async def eleven():
 
 def schedule_jobs():
     scheduler.add_job(seven, 'date', run_date=datetime(2021, 1, 15, 00, 48, 20))
-    scheduler.add_job(eight, 'date', run_date=datetime(2021, 1, 15, 00, 48, 30))
+    scheduler.add_job(eight, 'date', run_date=datetime(2021, 1, 15, 2, 48, 30))
     scheduler.add_job(nine, 'date', run_date=datetime(2021, 1, 15, 00, 48, 40))
     scheduler.add_job(ten, 'date', run_date=datetime(2021, 1, 15, 00, 48, 50))
     scheduler.add_job(eleven, 'date', run_date=datetime(2021, 1, 15, 00, 49, 00))
