@@ -7,6 +7,8 @@ from loader import dp, scheduler, db
 
 video = 'BAACAgIAAxkBAAIE9V__UFnBnJMgaWSC3qPdSNhp1JMFAALWCwAC0qf5S9C4sTcyV3EmHgQ'
 photo_1 = 'AgACAgIAAxkBAAIFPl__V6TxXYGQbHV_8HyUar93zNCSAALXsDEb0qf5S8Zf9CLWae_lIAzkly4AAwEAAwIAA3kAA4ueBQABHgQ'
+file_message_four = 'BQACAgIAAxkBAAIGzmAAAZ8tmGl2Ma8UtyT7x47StanV7wACFQ0AAl5HAUjJxqCWOveHLh4E'
+photo_message_four = 'AgACAgIAAxkBAAIG3GAAAaB5O7IJxNzfYCIprnv15QalsAACjrExG1e4AAFIbXEohGEoBJnpbzSbLgADAQADAgADeQADI0sBAAEeBA'
 
 
 @dp.message_handler(CommandStart())
@@ -80,10 +82,11 @@ async def message_one(message: types.Message):
                                   '— Выполнить 3 домашних задания')
 
     async def message_four(message: types.Message):
-        await message.answer(text='Чтобы ты дошел до конца, по пути мы разложили 3 бонуса: '
-                                  'забирай первый по ссылке ниже — справочник «Архитектура Древней Руси»\n'
-                                  'а через час я пришлю тебе инструкцию как получить остальные бонусы.'
-                                  '(тут будет ссылка + под ней картинка)')
+        await message.answer_photo(photo=photo_message_four,
+                                   caption='Чтобы ты дошел до конца, по пути мы разложили 3 бонуса: '
+                                           'забирай первый по ссылке ниже — справочник «Архитектура Древней Руси»\n'
+                                           'А через час я пришлю тебе инструкцию как получить остальные бонусы.')
+        await message.answer_document(document=file_message_four)
 
     async def message_five(message: types.Message):
         await message.answer(
@@ -112,7 +115,7 @@ async def message_one(message: types.Message):
                  '2. Отправь в этот диалог кодовое слово в первые 24 часа после выхода урока\n\n'
                  '3. Бонус сразу придёт тебе обратным сообщением\n\n'
                  '—————\n\n'
-                 '<b>Все просто:</b> 18 октября в 15:00 выходит урок, смотришь, находишь слово, вводишь в бот, '
+                 '<b>Все просто:</b> 18 января в 15:00 выходит урок, смотришь, находишь слово, вводишь в бот, '
                  'забираешь бонус\n\nТак же на втором уроке — всего будет 2 слова, которые сложатся в особую фразу')
 
     scheduler.add_job(message_two, 'date', run_date=start_time + timedelta(seconds=60), args=(message,))
@@ -120,6 +123,3 @@ async def message_one(message: types.Message):
     scheduler.add_job(message_four, 'date', run_date=start_time + timedelta(seconds=180), args=(message,))
     scheduler.add_job(message_five, 'date', run_date=start_time + timedelta(seconds=240), args=(message,))
     scheduler.add_job(message_six, 'date', run_date=start_time + timedelta(seconds=3600), args=(message,))
-
-
-
