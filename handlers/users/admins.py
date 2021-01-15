@@ -1,10 +1,11 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.builtin import Command
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+
 from keyboards.default.admin_keyboard import keyboard_for_admin, cancel_or_accept
 from states.admin_states import Admins
 from filters.is_admin import IsAdmin
-from aiogram.utils.markdown import hcode
 from loader import dp, db
 from utils.mailing import broadcaster
 
@@ -27,13 +28,18 @@ async def enter_text(message: types.Message):
 
 
 @dp.message_handler(IsAdmin(), text='Рассылка поста для юзеров')
-async def enter_text(message: types.Message):
-    await message.answer(text='Введите текст поста')
+async def mailing_for_users(message: types.Message):
+    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+        [
+            InlineKeyboardButton(text='Отмена', callback_data='cancel')
+        ]
+    ])
+    await message.answer(text='Введите текст/отправьте видео/файл/фото', reply_markup=keyboard)
     await Admins.enter_text.set()
 
 
 @dp.message_handler(state=Admins.enter_text, content_types=types.ContentTypes.VIDEO)
-async def text_check(message: types.Message, state: FSMContext):
+async def video_check(message: types.Message, state: FSMContext):
     video_id = message.video.file_id
     caption = message.caption
     await state.update_data(video=video_id)
@@ -45,7 +51,7 @@ async def text_check(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=Admins.enter_text, content_types=types.ContentTypes.PHOTO)
-async def text_check(message: types.Message, state: FSMContext):
+async def photo_check(message: types.Message, state: FSMContext):
     photo_id = message.photo[-1].file_id
     caption = message.caption
     await state.update_data(photo=photo_id)
@@ -57,7 +63,7 @@ async def text_check(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=Admins.enter_text, content_types=types.ContentTypes.DOCUMENT)
-async def text_check(message: types.Message, state: FSMContext):
+async def document_check(message: types.Message, state: FSMContext):
     file_id = message.document.file_id
     caption = message.caption
     await state.update_data(file=file_id)
@@ -78,7 +84,7 @@ async def text_check(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(state=Admins.check_text, text='Одобрить')
-async def choose_time(message: types.Message, state: FSMContext):
+async def send_messages(message: types.Message, state: FSMContext):
     await message.answer('Начал отправку',
                          reply_markup=keyboard_for_admin)
     data = await state.get_data()
@@ -93,6 +99,13 @@ async def choose_time(message: types.Message, state: FSMContext):
 
 
 @dp.message_handler(IsAdmin(), state='*', text='⬅️ Отмена')
-async def choose_time(message: types.Message, state: FSMContext):
+async def cancel(message: types.Message, state: FSMContext):
     await message.answer('Отмена отправки поста', reply_markup=keyboard_for_admin)
+    await state.finish()
+
+
+@dp.callback_query_handler(IsAdmin(), state='*', text='cancel')
+async def cancel_inline(call: CallbackQuery, state: FSMContext):
+    await call.answer(cache_time=60)
+    await call.message.delete()
     await state.finish()
