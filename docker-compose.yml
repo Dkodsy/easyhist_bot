@@ -1,0 +1,18 @@
+version: "3.1"
+services:
+  tgbot:
+    container_name: bot
+    build:
+      context: .
+    command: python app.py
+    networks:
+      - botnet
+    restart: always
+    env_file:
+      - ".env"
+
+# указываются используемые сети
+networks:
+  botnet:
+    # указывается драйвер сети
+    driver: bridge
