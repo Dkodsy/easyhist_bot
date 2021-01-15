@@ -2,3 +2,4 @@ aiogram>=2.11.2,<3.0
 apscheduler
 environs~=8.0.0
 asyncpg
+python-dotenv
