@@ -5,10 +5,11 @@ from datetime import datetime, timedelta
 
 from loader import dp, scheduler, db
 
-video = 'BAACAgIAAxkBAAMIYAHDRdnyxDD_O3syTxgf-i6lguoAAtYLAALSp_lLI1JkFh23i7UeBA'
+video = 'BAACAgIAAxkBAAONYAHPqVJoisfMPTjGazquinzJoQwAAqYKAAJQeRFIcFtC2u4YDbweBA'
 photo_1 = 'AgACAgIAAxkBAAMKYAHDd5N_nSsQ7zzVVnAM4uoMFNcAAi6xMRtQeRFIWMIGHltEi1lMwimbLgADAQADAgADeQADCFsBAAEeBA'
 file_message_four = 'BQACAgIAAxkBAAMOYAHD2RT_PdTpr9kDiAsT0EEDyH8AAnYKAAJQeRFIskgmVHTMtoseBA'
-photo_message_four = 'AgACAgIAAxkBAAMMYAHDtS-_KOa0hbxywjbLsx6-rHUAAi-xMRtQeRFIPVpNbKLGjVBO6xeYLgADAQADAgADeQADybIFAAEeBA'
+photo_message_four = 'AgACAgIAAxkBAAMMYAHDtS-_KOa0hbxywjbLsx6-rHUAAi' \
+                     '-xMRtQeRFIPVpNbKLGjVBO6xeYLgADAQADAgADeQADybIFAAEeBA '
 
 
 @dp.message_handler(CommandStart())
