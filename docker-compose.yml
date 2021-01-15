@@ -1,5 +1,19 @@
 version: "3.1"
 services:
+  db:
+  ВНИМАТЕЛЬНО! ВОТ ЭТО НАЗВАНИЕ СЕРВИСА - db - ДОЛЖНО БЫТЬ УКАЗАНО В БОТЕ КАК host В ПОДКЛЮЧЕНИИ К БАЗЕ ИЗ БОТА
+  ТО ЕСТЬ НЕ АЙПИШНИК И НЕ ЛОКАЛХОСТ, А db
+  container_name: database
+  image: sameersbn/postgresql:10-2
+  environment:
+    PG_PASSWORD: $PGPASSWORD
+  restart: always
+  ports:
+    - 5432:5432
+  networks:
+    - botnet
+  volumes:
+    - ./postgres:/var/lib/postgresql
   tgbot:
     container_name: bot
     build:
