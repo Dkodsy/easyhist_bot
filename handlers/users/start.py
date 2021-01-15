@@ -5,10 +5,10 @@ from datetime import datetime, timedelta
 
 from loader import dp, scheduler, db
 
-video = 'BAACAgIAAxkBAAIE9V__UFnBnJMgaWSC3qPdSNhp1JMFAALWCwAC0qf5S9C4sTcyV3EmHgQ'
-photo_1 = 'AgACAgIAAxkBAAIFPl__V6TxXYGQbHV_8HyUar93zNCSAALXsDEb0qf5S8Zf9CLWae_lIAzkly4AAwEAAwIAA3kAA4ueBQABHgQ'
-file_message_four = 'BQACAgIAAxkBAAIGzmAAAZ8tmGl2Ma8UtyT7x47StanV7wACFQ0AAl5HAUjJxqCWOveHLh4E'
-photo_message_four = 'AgACAgIAAxkBAAIG3GAAAaB5O7IJxNzfYCIprnv15QalsAACjrExG1e4AAFIbXEohGEoBJnpbzSbLgADAQADAgADeQADI0sBAAEeBA'
+video = 'BAACAgIAAxkBAAMIYAHDRdnyxDD_O3syTxgf-i6lguoAAtYLAALSp_lLI1JkFh23i7UeBA'
+photo_1 = 'AgACAgIAAxkBAAMKYAHDd5N_nSsQ7zzVVnAM4uoMFNcAAi6xMRtQeRFIWMIGHltEi1lMwimbLgADAQADAgADeQADCFsBAAEeBA'
+file_message_four = 'BQACAgIAAxkBAAMOYAHD2RT_PdTpr9kDiAsT0EEDyH8AAnYKAAJQeRFIskgmVHTMtoseBA'
+photo_message_four = 'AgACAgIAAxkBAAMMYAHDtS-_KOa0hbxywjbLsx6-rHUAAi-xMRtQeRFIPVpNbKLGjVBO6xeYLgADAQADAgADeQADybIFAAEeBA'
 
 
 @dp.message_handler(CommandStart())
@@ -24,6 +24,7 @@ async def message_one(message: types.Message):
                           start_time=datetime.now())
     except asyncpg.exceptions.UniqueViolationError as err:
         print("Пользователь уже в базе\n", err)
+        return None
 
     start_time = await db.select_start_time(id=user_id)
 

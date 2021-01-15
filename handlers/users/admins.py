@@ -23,7 +23,6 @@ async def enter_text(message: types.Message):
     for user in all_users:
         user = f'id - {user[0]}, name-{user[1]}, Время нажатия на старт - {user[2]}\n'
         format_all_users.append(user)
-    print(format_all_users)
     await message.answer(f"Список пользователей\n{''.join(format_all_users)}")
 
 
