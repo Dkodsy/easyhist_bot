@@ -8,7 +8,7 @@ from loader import dp, scheduler, db
 video = 'BAACAgIAAxkBAAONYAHPqVJoisfMPTjGazquinzJoQwAAqYKAAJQeRFIcFtC2u4YDbweBA'
 photo_1 = 'AgACAgIAAxkBAAMKYAHDd5N_nSsQ7zzVVnAM4uoMFNcAAi6xMRtQeRFIWMIGHltEi1lMwimbLgADAQADAgADeQADCFsBAAEeBA'
 file_message_four = 'BQACAgIAAxkBAAMOYAHD2RT_PdTpr9kDiAsT0EEDyH8AAnYKAAJQeRFIskgmVHTMtoseBA'
-photo_message_four = 'AgACAgIAAxkBAAMMYAHDtS-_KOa0hbxywjbLsx6-rHUAAi-xMRtQeRFIPVpNbKLGjVBO6xeYLgADAQADAgADeQADybIFAAEeBA '
+photo_message_four = 'AgACAgIAAxkBAAMMYAHDtS-_KOa0hbxywjbLsx6-rHUAAi-xMRtQeRFIPVpNbKLGjVBO6xeYLgADAQADAgADeQADybIFAAEeBA'
 
 
 @dp.message_handler(CommandStart())
@@ -16,6 +16,7 @@ async def message_one(message: types.Message):
     await message.answer_video(
         video=video,
         caption="Привет👋🏻 Включи звук")
+
     user_id = message.from_user.id
 
     try:
