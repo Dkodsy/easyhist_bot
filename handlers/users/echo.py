@@ -10,15 +10,15 @@ async def bot_echo(message: types.Message):
     if message.text.lower() == 'вече':
         await message.answer('Ура! Кодовое слово названо верно😉\n'
                              'Держи свой бонус «Частые ошибки при подготовке к ЕГЭ» по ссылке ниже\n\n'
-                             'easyhist.ru/bonus\n'
-                             'easyhist.ru/bonus\n'
-                             'easyhist.ru/bonus')
+                             'www.easyhist.ru/bonus\n'
+                             'www.easyhist.ru/bonus\n'
+                             'www.easyhist.ru/bonus')
     elif message.text.lower() == 'барщина':
         await message.answer('Ура! Кодовое слово названо верно😉\n'
                              'Держи свой бонус «Частые ошибки на ЕГЭ»\n\n'
-                             'easyhist.ru/secret\n'
-                             'easyhist.ru/secret\n'
-                             'easyhist.ru/secret')
+                             'www.easyhist.ru/secret\n'
+                             'www.easyhist.ru/secret\n'
+                             'www.easyhist.ru/secret')
     else:
         await message.answer('Вероятно, ты хочешь ввести кодовое слово из урока, ты не угадал, попробуй еще раз😊\n'
                              'Если у тебя есть какой-то вопрос, пиши @help_easyhist')
