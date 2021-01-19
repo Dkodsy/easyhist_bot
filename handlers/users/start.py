@@ -147,5 +147,5 @@ async def message_one(message: types.Message):
     scheduler.add_job(message_four, 'date', run_date=start_time + timedelta(seconds=180), args=(message,))
     scheduler.add_job(message_five, 'date', run_date=start_time + timedelta(seconds=240), args=(message,))
     scheduler.add_job(message_six, 'date', run_date=start_time + timedelta(seconds=3600), args=(message,))
-    scheduler.add_job(message_seven(), 'date', run_date=start_time + timedelta(seconds=300), args=(message,))
+    scheduler.add_job(message_seven, 'date', run_date=start_time + timedelta(seconds=300), args=(message,))
 
